@@ -52,14 +52,14 @@ In hieradata/common.yaml:
 
 This module has one class:
 
-    nfs {
+    class { 'nfs' :
         package => # The NFS package to install. Can be an array, e.g. 'nfs'
         service => # The NFS service to run. Can be an array, e.g. 'nfsd'
     }
 
 This module has 1 defined type:
 
-    nfs::export {
+    nfs::export { 'resource title' :
         share   => # The full path of the directory you want to share, e.g. /srv/nfs. Defaults to title.
         clients => # An array of computers to share with, e.g. ['192.168.1.0/24', 'mylaptop']
         options => # An array of options for the share, e.g. ['rw', 'async', 'no_subtree_check']
