@@ -40,56 +40,62 @@ Requires augeas for managing exports.
 The simplest use is to install and start the nfs service.
 
 In manfiests/site.pp:
-include nfs
+
+    include nfs
 
 In hieradata/common.yaml:
-nfs::package: nfs
-nfs::service: nfsd
+
+    nfs::package: nfs
+    nfs::service: nfsd
 
 ## Usage
 
 This module has one class:
-nfs {
-    package => # The NFS package to install. Can be an array, e.g. 'nfs'
-    service => # The NFS service to run. Can be an array, e.g. 'nfsd'
-}
+
+    nfs {
+        package => # The NFS package to install. Can be an array, e.g. 'nfs'
+        service => # The NFS service to run. Can be an array, e.g. 'nfsd'
+    }
 
 This module has 1 defined type:
-nfs::export {
-    share   => # The full path of the directory you want to share, e.g. /srv/nfs. Defaults to the title
-    clients => # An array of computers to share with, e.g. ['192.168.1.0/24', 'mylaptop']
-    options => # An array of options for the share, e.g. ['rw', 'async', 'no_subtree_check']
-}
+
+    nfs::export {
+        share   => # The full path of the directory you want to share, e.g. /srv/nfs. Defaults to title.
+        clients => # An array of computers to share with, e.g. ['192.168.1.0/24', 'mylaptop']
+        options => # An array of options for the share, e.g. ['rw', 'async', 'no_subtree_check']
+    }
 
 The nfs class also includes the following optional hiera hashes:
-nfs::exports:          # A hash containing all the nfs::export resources.
-nfs::export_defaults:  # A hash of defaults for the nfs::export resource.
-nfs::mounts:           # A hash containing all the mount resources for you nfs mounts.
-nfs::mount_defaults:   # A hash of defaults for the mount resource.
 
-Example
-nfs::export_defaults:
-    clients:
-        - 192.168.1.0/24
-    options:
-        - ro
-        - all_squash
-nfs::exports:
-    /srv/myshare:
+    nfs::exports:          # A hash containing all the nfs::export resources.
+    nfs::export_defaults:  # A hash of defaults for the nfs::export resource.
+    nfs::mounts:           # A hash containing all the mount resources for you nfs mounts.
+    nfs::mount_defaults:   # A hash of defaults for the mount resource.
+
+Example lookups for common.yaml:
+
+    nfs::export_defaults:
         clients:
-            - mylaptop
+            - 192.168.1.0/24
         options:
-            - async
-            - no_subtree_check
-nfs::mount_defaults:
-    ensure: present
-    fstype: nfs
-    dump:   0
-    pass:   0
-    options: defaults
-nfs::mounts:
-    /shared/myserver:
-        device: myserver:/srv/nfs
+            - ro
+            - all_squash
+    nfs::exports:
+        /srv/myshare:
+            clients:
+                - mylaptop
+            options:
+                - async
+                - no_subtree_check
+    nfs::mount_defaults:
+        ensure: present
+        fstype: nfs
+        dump:   0
+        pass:   0
+        options: defaults
+    nfs::mounts:
+        /shared/myserver:
+            device: myserver:/srv/nfs
 
 ## Reference
 
