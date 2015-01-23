@@ -1,0 +1,7 @@
+set /files/etc/exports/dir[.='<%= @share %>'] <%= @share %>
+<% @clients.each do |cli| -%>
+ set /files/etc/exports/dir[.='<%= @share %>']/client[.='<%= cli %>'] <%= cli %>
+ <% @options.each do |opt| -%>
+   set /files/etc/exports/dir[.='<%= @share %>']/client[.='<%= cli %>']/option[.='<%= opt %>'] <%= opt %>
+ <% end -%>
+<% end -%>
