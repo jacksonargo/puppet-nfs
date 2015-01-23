@@ -1,6 +1,6 @@
 {
   "name": "jackson-nfs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Jackson",
   "summary": "Manage nfs mounts and exports",
   "license": "Apache 2.0",
@@ -8,7 +8,6 @@
   "project_page": "https://github.com/jacksonargo/puppet-nfs",
   "issues_url": "https://github.com/jacksonargo/puppet-nfs/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
   ]
 }
 
